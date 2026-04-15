@@ -8,6 +8,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     baseURL: 'https://www.saucedemo.com',
+    headless: true,
     trace: 'on',
     screenshot: 'only-on-failure'
   },
