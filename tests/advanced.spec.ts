@@ -119,14 +119,17 @@ test.describe("Dialogs", () => {
     test("Download file", async ({ page }) => {
         await page.goto("https://the-internet.herokuapp.com/download");
 
+        const fileName = "some-file.txt";
+
         const [download] = await Promise.all([
             page.waitForEvent("download"),
-            page.getByRole("link", { name: "some-file.txt" }).click()
+            page.getByRole("link", { name: fileName }).click()
         ]);
 
         console.log("Downloaded: ", download.suggestedFilename());
-
         await download.saveAs("./downloads/" + download.suggestedFilename());
+
+        expect(download.suggestedFilename()).toBe(fileName);
     });
 
 });
