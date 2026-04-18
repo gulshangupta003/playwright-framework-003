@@ -1,5 +1,4 @@
 import test, { expect } from "@playwright/test";
-import { beforeEach } from "node:test";
 
 test.describe("Dialogs", () => {
 
@@ -82,6 +81,39 @@ test.describe("Dialogs", () => {
         const leftFrame = topFrame.frameLocator("[name='frame-left']");
 
         await expect(leftFrame.getByText("LEFT")).toBeVisible();
+    });
+
+    // File upload and download
+
+    test("Upload a file", async ({ page }) => {
+        await page.goto("https://the-internet.herokuapp.com/upload");
+
+        await page.locator("#file-upload").setInputFiles("package.json");
+        await page.locator("#file-submit").click();
+
+        await expect(page.locator("#uploaded-files")).toHaveText("package.json");
+    });
+
+    test("Upload multiple files", async ({ page }) => {
+        await page.goto("https://davidwalsh.name/demo/multiple-file-upload.php");
+
+        await page.locator("#filesToUpload").setInputFiles([
+            "tsconfig.json",
+            "package.json"
+        ]);
+
+        await expect(page.getByText("tsconfig.json")).toBeVisible();
+        await expect(page.getByText("package.json")).toBeVisible();
+    });
+
+    test("Remove selected file", async ({ page }) => {
+        await page.goto("https://davidwalsh.name/demo/multiple-file-upload.php");
+
+        await page.locator("#filesToUpload").setInputFiles("package.json");
+        await expect(page.getByText("package.json")).toBeVisible();
+
+        await page.locator("#filesToUpload").setInputFiles([]);
+        await expect(page.getByText("No Files Selected")).toBeVisible();
     });
 
 });
