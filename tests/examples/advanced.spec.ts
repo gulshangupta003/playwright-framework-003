@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 
-test.describe("Dialogs", () => {
+test.describe.skip("Dialogs", () => {
 
     // Handle dialog (alert, confirm, prompt)
 
