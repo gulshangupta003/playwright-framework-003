@@ -19,7 +19,7 @@ test.describe('Login Page', () => {
         await expect(page).toHaveURL("/inventory.html");
     })
 
-    test("Should show error for invalid credentials", async ({ page }) => {
+    test("Should show error for invalid credentials", async () => {
         const username: string = "wrong_user";
         const password: string = "wrong_pass";
 
@@ -29,7 +29,7 @@ test.describe('Login Page', () => {
         await expect(loginPage.getErrorMessage()).toContainText("Username and password do not match");
     });
 
-    test("Should show error for locked out user", async ({ page }) => {
+    test("Should show error for locked out user", async () => {
         const username = "locked_out_user";
         const password = "secret_sauce";
 
