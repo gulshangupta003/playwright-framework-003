@@ -1,28 +1,42 @@
 import test, { expect } from "@playwright/test";
+import { LoginPage } from "../pages/login.page";
 
 test.describe('Login Page', () => {
 
-    test("Should login with valid credentials", async ({ page }) => {
-        await page.goto('/');
+    let loginPage: LoginPage;
 
-        await page.getByPlaceholder("Username").fill("standard_user");
-        await page.getByPlaceholder("Password").fill("secret_sauce");
-        await page.getByRole("button", { name: "Login" }).click();
+    test.beforeEach(async ({ page }) => {
+        loginPage = new LoginPage(page);
+        await loginPage.goto();
+    });
+
+    test("Should login with valid credentials", async ({ page }) => {
+        const username: string = "standard_user";
+        const password: string = "secret_sauce";
+
+        await loginPage.login(username, password);
 
         await expect(page).toHaveURL("/inventory.html");
-        await expect(page.getByText("Products")).toBeVisible();
-    });
+    })
 
     test("Should show error for invalid credentials", async ({ page }) => {
-        await page.goto("/");
+        const username: string = "wrong_user";
+        const password: string = "wrong_pass";
 
-        await page.getByPlaceholder("Username").fill("wrong_user");
-        await page.getByPlaceholder("Password").fill("wrong_pass");
-        await page.getByRole("button", { name: "Login" }).click();
+        await loginPage.login(username, password);
 
-        const errMsg = page.locator("[data-test='error']");
-        await expect(errMsg).toBeVisible();
-        await expect(errMsg).toContainText("Username and password do not match");
+        await expect(loginPage.getErrorMessage()).toBeVisible();
+        await expect(loginPage.getErrorMessage()).toContainText("Username and password do not match");
     });
+
+    test("Should show error for locked out user", async ({ page }) => {
+        const username = "locked_out_user";
+        const password = "secret_sauce";
+
+        await loginPage.login(username, password);
+
+        await expect(loginPage.getErrorMessage()).toBeVisible();
+        await expect(loginPage.getErrorMessage()).toContainText("Sorry, this user has been locked out.");
+    })
 
 });
