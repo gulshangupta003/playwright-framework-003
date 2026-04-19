@@ -17,7 +17,7 @@ test.describe("Inventory Page", () => {
         await expect(inventoryPage.getInventoryItems()).toHaveCount(6);
     });
 
-    test("Should add item to cart", async ({ page }) => {
+    test("Should add item to cart", async () => {
         const productName: string = "Sauce Labs Backpack";
         await inventoryPage.addToCartByName(productName);
 
