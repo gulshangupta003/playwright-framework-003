@@ -1,4 +1,4 @@
-import { test, expect } from "../fixtures/auth.fixtures";
+import { test, expect } from "../fixtures/test-fixtures";
 
 test.describe("Cart Page", () => {
 
