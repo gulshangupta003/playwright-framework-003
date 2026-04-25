@@ -8,6 +8,7 @@ test.describe("User API", () => {
                 page: 2
             },
             headers: {
+                // ToDo: remove key and use .env
                 "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
             }
         });
@@ -23,6 +24,7 @@ test.describe("User API", () => {
     test("GET - should fetch single user", async ({ request }) => {
         const response = await request.get("https://reqres.in/api/users/2", {
             headers: {
+                // ToDo: remove key and use .env
                 "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
             }
         });
@@ -36,6 +38,7 @@ test.describe("User API", () => {
     test("GET - should return 404 for non-existent user", async ({ request }) => {
         const response = await request.get("https://reqres.in/api/users/23", {
             headers: {
+                // ToDo: remove key and use .env
                 "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
             }
         });
@@ -50,6 +53,7 @@ test.describe("User API", () => {
                 job: "SDET"
             },
             headers: {
+                // ToDo: remove key and use .env
                 "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
             }
         });
@@ -69,6 +73,7 @@ test.describe("User API", () => {
                 job: "Senior SDET"
             },
             headers: {
+                // ToDo: remove key and use .env
                 "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
             }
         });
@@ -82,6 +87,7 @@ test.describe("User API", () => {
     test("DELETE - should delete a user", async ({ request }) => {
         const response = await request.delete("https://reqres.in/api/users/2", {
             headers: {
+                // ToDo: remove key and use .env
                 "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
             }
         });
