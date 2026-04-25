@@ -3,7 +3,7 @@ import test, { expect, request } from "@playwright/test";
 test.describe("Auth API", () => {
 
     test("POST - should login successfully", async ({ request }) => {
-        const response = await request.post("https://reqres.in/api/login", {
+        const response = await request.post("/login", {
             data: {
                 email: "eve.holt@reqres.in",
                 password: "cityslicka"
@@ -21,7 +21,7 @@ test.describe("Auth API", () => {
     });
 
     test("POST - should fail login with missing password", async ({ request }) => {
-        const response = await request.post("https://reqres.in/api/login", {
+        const response = await request.post("/login", {
             data: {
                 email: "eve.holt@reqres.in"
             },
@@ -38,7 +38,7 @@ test.describe("Auth API", () => {
     });
 
     test("POST - should register successfully", async ({ request }) => {
-        const response = await request.post("https://reqres.in/api/register", {
+        const response = await request.post("/register", {
             data: {
                 email: "eve.holt@reqres.in",
                 password: "pistol"
