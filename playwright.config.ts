@@ -1,4 +1,4 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
@@ -8,13 +8,12 @@ export default defineConfig({
   reporter: 'html',
   use: {
     trace: 'on',
-    screenshot: 'only-on-failure'
+    screenshot: 'only-on-failure',
   },
   projects: [
     {
       name: 'ui-tests',
       testDir: './tests/ui',
-      testIgnore: '**/api/**',
       use: {
         baseURL: 'https://www.saucedemo.com',
         ...devices['Desktop Chrome'],
@@ -23,7 +22,6 @@ export default defineConfig({
     {
       name: 'api-tests',
       testDir: './tests/api',
-      testIgnore: './tests/ui',
       use: {
         baseURL: 'https://reqres.in/api',
         extraHTTPHeaders: {
