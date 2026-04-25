@@ -9,6 +9,7 @@ test.describe("Auth API", () => {
                 password: "cityslicka"
             },
             headers: {
+                // ToDo: remove key and use .env
                 "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
             }
         });
@@ -25,6 +26,7 @@ test.describe("Auth API", () => {
                 email: "eve.holt@reqres.in"
             },
             headers: {
+                // ToDo: remove key and use .env
                 "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
             }
         });
@@ -42,6 +44,7 @@ test.describe("Auth API", () => {
                 password: "pistol"
             },
             headers: {
+                // ToDo: remove key and use .env
                 "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
             }
         });
