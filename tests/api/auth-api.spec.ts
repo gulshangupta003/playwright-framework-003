@@ -1,16 +1,18 @@
-import test, { expect, request } from "@playwright/test";
+import test, { expect } from "@playwright/test";
+import dotenv from "dotenv";
+dotenv.config();
+
 
 test.describe("Auth API", () => {
 
     test("POST - should login successfully", async ({ request }) => {
-        const response = await request.post("/login", {
+        const response = await request.post("https://reqres.in/api/login", {
             data: {
                 email: "eve.holt@reqres.in",
                 password: "cityslicka"
             },
             headers: {
-                // ToDo: remove key and use .env
-                "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
+                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -21,13 +23,12 @@ test.describe("Auth API", () => {
     });
 
     test("POST - should fail login with missing password", async ({ request }) => {
-        const response = await request.post("/login", {
+        const response = await request.post("https://reqres.in/api/login", {
             data: {
                 email: "eve.holt@reqres.in"
             },
             headers: {
-                // ToDo: remove key and use .env
-                "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
+                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -38,14 +39,13 @@ test.describe("Auth API", () => {
     });
 
     test("POST - should register successfully", async ({ request }) => {
-        const response = await request.post("/register", {
+        const response = await request.post("https://reqres.in/api/register", {
             data: {
                 email: "eve.holt@reqres.in",
                 password: "pistol"
             },
             headers: {
-                // ToDo: remove key and use .env
-                "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
+                "x-api-key": process.env.API_KEY as string
             }
         });
 
