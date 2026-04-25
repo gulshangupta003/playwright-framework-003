@@ -1,7 +1,6 @@
-import test, { expect } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import dotenv from "dotenv";
 dotenv.config();
-
 
 test.describe("Auth API", () => {
 
@@ -54,6 +53,6 @@ test.describe("Auth API", () => {
         const body = await response.json();
         expect(body.id).toBeTruthy();
         expect(body.token).toBeTruthy();
-    })
+    });
 
 });
