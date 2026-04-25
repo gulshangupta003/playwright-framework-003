@@ -1,15 +1,16 @@
 import { test, expect } from "@playwright/test";
+import dotenv from "dotenv";
+dotenv.config();
 
 test.describe("User API", () => {
 
     test("GET - should fetch list of users", async ({ request }) => {
-        const response = await request.get("/users", {
+        const response = await request.get("https://reqres.in/api/users", {
             params: {
                 page: 2
             },
             headers: {
-                // ToDo: remove key and use .env
-                "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
+                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -22,10 +23,9 @@ test.describe("User API", () => {
     });
 
     test("GET - should fetch single user", async ({ request }) => {
-        const response = await request.get("/users/2", {
+        const response = await request.get("https://reqres.in/api/users/2", {
             headers: {
-                // ToDo: remove key and use .env
-                "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
+                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -36,10 +36,9 @@ test.describe("User API", () => {
     });
 
     test("GET - should return 404 for non-existent user", async ({ request }) => {
-        const response = await request.get("/users/23", {
+        const response = await request.get("https://reqres.in/api/users/23", {
             headers: {
-                // ToDo: remove key and use .env
-                "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
+                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -47,14 +46,13 @@ test.describe("User API", () => {
     });
 
     test("POST - should create a user", async ({ request }) => {
-        const response = await request.post("/users", {
+        const response = await request.post("https://reqres.in/api/users", {
             data: {
                 name: "Gulshan",
                 job: "SDET"
             },
             headers: {
-                // ToDo: remove key and use .env
-                "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
+                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -68,13 +66,12 @@ test.describe("User API", () => {
     });
 
     test("PATCH - should partially update a user", async ({ request }) => {
-        const response = await request.patch("/users/2", {
+        const response = await request.patch("https://reqres.in/api/users/2", {
             data: {
                 job: "Senior SDET"
             },
             headers: {
-                // ToDo: remove key and use .env
-                "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
+                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -85,10 +82,9 @@ test.describe("User API", () => {
     });
 
     test("DELETE - should delete a user", async ({ request }) => {
-        const response = await request.delete("/users/2", {
+        const response = await request.delete("https://reqres.in/api/users/2", {
             headers: {
-                // ToDo: remove key and use .env
-                "x-api-key": "reqres_4fd183b2b1d04d508f70ec793404dbdc"
+                "x-api-key": process.env.API_KEY as string
             }
         });
 
