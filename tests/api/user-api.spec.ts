@@ -1,16 +1,11 @@
 import { test, expect } from "@playwright/test";
-import dotenv from "dotenv";
-dotenv.config();
 
 test.describe("User API", () => {
 
     test("GET - should fetch list of users", async ({ request }) => {
-        const response = await request.get("https://reqres.in/api/users", {
+        const response = await request.get("/api/users", {
             params: {
                 page: 2
-            },
-            headers: {
-                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -23,11 +18,7 @@ test.describe("User API", () => {
     });
 
     test("GET - should fetch single user", async ({ request }) => {
-        const response = await request.get("https://reqres.in/api/users/2", {
-            headers: {
-                "x-api-key": process.env.API_KEY as string
-            }
-        });
+        const response = await request.get("/api/users/2");
 
         expect(response.status()).toBe(200);
 
@@ -36,23 +27,16 @@ test.describe("User API", () => {
     });
 
     test("GET - should return 404 for non-existent user", async ({ request }) => {
-        const response = await request.get("https://reqres.in/api/users/23", {
-            headers: {
-                "x-api-key": process.env.API_KEY as string
-            }
-        });
+        const response = await request.get("/api/users/23");
 
         expect(response.status()).toBe(404);
     });
 
     test("POST - should create a user", async ({ request }) => {
-        const response = await request.post("https://reqres.in/api/users", {
+        const response = await request.post("/api/users", {
             data: {
                 name: "Gulshan",
                 job: "SDET"
-            },
-            headers: {
-                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -66,12 +50,9 @@ test.describe("User API", () => {
     });
 
     test("PATCH - should partially update a user", async ({ request }) => {
-        const response = await request.patch("https://reqres.in/api/users/2", {
+        const response = await request.patch("/api/users/2", {
             data: {
                 job: "Senior SDET"
-            },
-            headers: {
-                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -82,11 +63,7 @@ test.describe("User API", () => {
     });
 
     test("DELETE - should delete a user", async ({ request }) => {
-        const response = await request.delete("https://reqres.in/api/users/2", {
-            headers: {
-                "x-api-key": process.env.API_KEY as string
-            }
-        });
+        const response = await request.delete("/api/users/2");
 
         expect(response.status()).toBe(204);
     });

@@ -1,17 +1,12 @@
 import { test, expect } from "@playwright/test";
-import dotenv from "dotenv";
-dotenv.config();
 
 test.describe("Auth API", () => {
 
     test("POST - should login successfully", async ({ request }) => {
-        const response = await request.post("https://reqres.in/api/login", {
+        const response = await request.post("/api/login", {
             data: {
                 email: "eve.holt@reqres.in",
                 password: "cityslicka"
-            },
-            headers: {
-                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -22,12 +17,9 @@ test.describe("Auth API", () => {
     });
 
     test("POST - should fail login with missing password", async ({ request }) => {
-        const response = await request.post("https://reqres.in/api/login", {
+        const response = await request.post("/api/login", {
             data: {
                 email: "eve.holt@reqres.in"
-            },
-            headers: {
-                "x-api-key": process.env.API_KEY as string
             }
         });
 
@@ -38,13 +30,10 @@ test.describe("Auth API", () => {
     });
 
     test("POST - should register successfully", async ({ request }) => {
-        const response = await request.post("https://reqres.in/api/register", {
+        const response = await request.post("/api/register", {
             data: {
                 email: "eve.holt@reqres.in",
                 password: "pistol"
-            },
-            headers: {
-                "x-api-key": process.env.API_KEY as string
             }
         });
 
