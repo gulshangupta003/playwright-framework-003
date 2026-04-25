@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default defineConfig({
   testDir: './tests',
@@ -23,9 +26,10 @@ export default defineConfig({
       name: 'api-tests',
       testDir: './tests/api',
       use: {
-        baseURL: 'https://reqres.in/api',
+        baseURL: 'https://reqres.in',
         extraHTTPHeaders: {
           'Content-Type': 'application/json',
+          'x-api-key': process.env.API_KEY || ''
         },
       },
     },
