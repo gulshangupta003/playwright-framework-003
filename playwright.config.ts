@@ -16,7 +16,8 @@ export default defineConfig({
   projects: [
     {
       name: 'ui-tests',
-      testDir: './tests/ui',
+      testDir: './tests',
+      testIgnore: '**/api/**',
       use: {
         baseURL: 'https://www.saucedemo.com',
         ...devices['Desktop Chrome'],
