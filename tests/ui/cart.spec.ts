@@ -2,7 +2,7 @@ import { test, expect } from "../../fixtures/test-fixtures";
 
 test.describe("Cart Page", () => {
 
-    test("Should show added item in cart", async ({ authenticatedPage, cartPage }) => {
+    test("Should show added item in cart @regression", async ({ authenticatedPage, cartPage }) => {
         const productName = "Sauce Labs Backpack";
 
         await authenticatedPage.addToCartByName(productName);
@@ -12,7 +12,7 @@ test.describe("Cart Page", () => {
         await expect(cartPage.getCartItems()).toHaveCount(1);
     });
 
-    test("Should remove item from cart", async ({ authenticatedPage, cartPage }) => {
+    test("Should remove item from cart @regression", async ({ authenticatedPage, cartPage }) => {
         const productName = "Sauce Labs Bike Light";
 
         await authenticatedPage.addToCartByName(productName);
@@ -22,7 +22,7 @@ test.describe("Cart Page", () => {
         await expect(cartPage.getCartItems()).toHaveCount(0);
     });
 
-    test("Should go back to shopping", async ({ page, authenticatedPage, cartPage }) => {
+    test("Should go back to shopping @regression", async ({ page, authenticatedPage, cartPage }) => {
         await authenticatedPage.header.goToCart();
         await cartPage.continueShopping();
 
