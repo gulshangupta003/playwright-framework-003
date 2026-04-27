@@ -2,7 +2,7 @@ import { test, expect } from "../../fixtures/test-fixtures";
 
 test.describe('Login Page', () => {
 
-    test("Should login with valid credentials", async ({ page, loginPage }) => {
+    test("Should login with valid credentials @smoke", async ({ page, loginPage }) => {
         const username: string = "standard_user";
         const password: string = "secret_sauce";
 
@@ -11,7 +11,7 @@ test.describe('Login Page', () => {
         await expect(page).toHaveURL("/inventory.html");
     });
 
-    test("Should show error for invalid credentials", async ({ loginPage }) => {
+    test("Should show error for invalid credentials @negative", async ({ loginPage }) => {
         const username: string = "wrong_user";
         const password: string = "wrong_pass";
 
@@ -21,7 +21,7 @@ test.describe('Login Page', () => {
         await expect(loginPage.getErrorMessage()).toContainText("Username and password do not match");
     });
 
-    test("Should show error for locked out user", async ({ loginPage }) => {
+    test("Should show error for locked out user @negative", async ({ loginPage }) => {
         const username = "locked_out_user";
         const password = "secret_sauce";
 

@@ -38,7 +38,7 @@ test.describe("Login - Data Driven Tests", () => {
 
     // Array loop
     for (const data of invalidCredentials) {
-        test(`Should show error for ${data.description}`, async ({ loginPage }) => {
+        test(`Should show error for ${data.description} @negative`, async ({ loginPage }) => {
             await loginPage.login(data.username, data.password);
 
             await expect(loginPage.getErrorMessage()).toBeVisible();
@@ -48,7 +48,7 @@ test.describe("Login - Data Driven Tests", () => {
 
     // External JSON file
     for (const data of validUsers) {
-        test(`Should login successfully as ${data.username}`, async ({ page, loginPage }) => {
+        test(`Should login successfully as ${data.username} @regression @happy-path`, async ({ page, loginPage }) => {
             await loginPage.login(data.username, data.password);
 
             await expect(page).toHaveURL("/inventory.html");
