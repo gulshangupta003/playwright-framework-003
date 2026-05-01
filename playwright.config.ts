@@ -4,18 +4,22 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default defineConfig({
+  globalSetup: './global-setup.ts',
+  globalTeardown: './global-teardown.ts',
   testDir: './tests',
   fullyParallel: true,
+  workers: process.env.CI ? 5 : 1,
   retries: process.env.CI ? 2 : 0,
   timeout: 30000,
   expect: {
     timeout: 5000,
   },
-  workers: 1,
-  reporter: 'html',
+  reporter: [
+    ['list'],
+    ['html']
+  ],
   use: {
     trace: process.env.CI ? 'on-first-retry' : 'on',
-    screenshot: 'only-on-failure',
   },
   projects: [
     {
@@ -25,6 +29,7 @@ export default defineConfig({
         baseURL: 'https://www.saucedemo.com',
         ...devices['Desktop Chrome'],
         headless: true,
+        screenshot: 'only-on-failure',
       },
     },
     {

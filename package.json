@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "test-ui": "npx playwright test --project=ui-tests",
+    "test-api": "npx playwright test --project=api-test",
+    "test-ui-smoke": "npx playwright test --project=ui-tests --grep @smoke",
+    "test-ui-regression": "npx playwright test --project=ui-tests --grep @regression",
+    "test-headed": "npx playwright test --headed",
+    "html-report": "npx playwright show-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
