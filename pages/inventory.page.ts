@@ -1,7 +1,8 @@
 import { Locator, Page } from "@playwright/test";
 import { HeaderComponent } from "./components/header.component";
+import { BasePage } from "./base.page";
 
-export class InventoryPage {
+export class InventoryPage extends BasePage {
 
     readonly header: HeaderComponent;
     private readonly inventoryItems: Locator;
@@ -9,7 +10,8 @@ export class InventoryPage {
     private readonly itemNames: Locator;
     private readonly itemPrices: Locator;
 
-    constructor(private page: Page) {
+    constructor(page: Page) {
+        super(page);
         this.header = new HeaderComponent(page);
         this.inventoryItems = page.locator(".inventory_item");
         this.sortDropdown = page.locator(".product_sort_container");

@@ -1,7 +1,8 @@
 import { Locator, Page } from "@playwright/test";
 import { HeaderComponent } from "./components/header.component";
+import { BasePage } from "./base.page";
 
-export class CartPage {
+export class CartPage extends BasePage {
 
     readonly header: HeaderComponent;
     private readonly title: Locator;
@@ -16,7 +17,8 @@ export class CartPage {
     private readonly finishButton: Locator;
     private readonly thankYouHead: Locator;
 
-    constructor(private page: Page) {
+    constructor(page: Page) {
+        super(page);
         this.header = new HeaderComponent(page);
         this.title = page.getByText("Your Cart");
         this.cartItems = page.locator(".cart_item");
