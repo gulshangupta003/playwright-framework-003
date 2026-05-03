@@ -34,6 +34,14 @@ jobs:
         env:
           API_KEY: ${{ secrets.API_KEY }}
 
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results/
+          retention-days: 30
+
       - name: Upload HTML Report
         if: always()
         uses: actions/upload-artifact@v4

@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from "dotenv";
 import { getEnvironment } from './config/environments';
+import os from 'os';
 
 dotenv.config();
 
@@ -17,10 +18,26 @@ export default defineConfig({
   expect: {
     timeout: 5000,
   },
-  reporter: [
-    ['list'],
-    ['html']
-  ],
+  reporter: process.env.CI
+    ? [
+      ['list'],
+      ['github'],
+      ['html'],
+      ['allure-playwright', {
+        outputFolder: 'allure-results',
+        environmentInfo: {
+          'Framework': 'Playwright',
+          'Language': 'TypeScript',
+          'ENV': env.env.toUpperCase(),
+          'OS': os.type(),
+          'Node Version': process.version
+        }
+      }]
+    ]
+    : [
+      ['list'],
+      ['html']
+    ],
   use: {
     trace: process.env.CI ? 'on-first-retry' : 'on',
     screenshot: 'only-on-failure',
@@ -28,7 +45,7 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'ui-tests',
+      name: 'ui-tests-chrome',
       testDir: './tests/ui',
       use: {
         baseURL: env.baseURL,
