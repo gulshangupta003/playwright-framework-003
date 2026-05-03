@@ -3,8 +3,8 @@ name: Playwright Tests
 on:
   push:
     branches: [main]
-  # pull_request:
-  #   branches: [main]
+  pull_request:
+    branches: [main]
 
   workflow_dispatch:
 
@@ -70,7 +70,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "npm"
 
       - name: Install Allure Command Line
         run: npm install -g allure-commandline
