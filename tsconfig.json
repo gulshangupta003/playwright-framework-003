@@ -1,9 +1,0 @@
-{
-    "compilerOptions": {
-        "types": [
-            "node"
-        ],
-        "noUnusedLocals": false,
-        "noUnusedParameters": false
-    }
-}
