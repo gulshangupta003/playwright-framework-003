@@ -8,9 +8,6 @@ on:
 
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -58,6 +55,10 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
 
+    permissions:
+      pages: write
+      id-token: write
+
     steps:
       - name: Download Allure Results
         uses: actions/download-artifact@v4
@@ -70,16 +71,16 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install Allure Command Line
+      - name: Install Allure CLI
         run: npm install -g allure-commandline
 
       - name: Generate Allure Report
         run: allure generate allure-results --clean -o allure-report
 
-      - name: Deploy to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload report to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./allure-report
+          path: allure-report
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
